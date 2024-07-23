@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -37,5 +38,17 @@ public class ItemsController {
         return "list";
     }
 
-
+    @RequestMapping("/detail")
+    public String Detail(@RequestParam String no, Model model){
+        System.out.println("detail");
+        try{
+            int num = Integer.parseInt(no);
+            Item list = (Item) service.read(num);
+            model.addAttribute("detailList", list);
+            System.out.println(list);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "detail";
+    }
 }

@@ -7,9 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title> CU 인기상품</title>
-    <script type="text/javascript">
 
-    </script>
     <style>
         .header{
             width:100vw;
@@ -114,6 +112,12 @@
     List<Item> list = (List<Item>)request.getAttribute("list");
 --%>
 <body style="overflow: scroll; margin: 0px">
+<script type="text/javascript">
+    function TodetailPage(no){
+        alert("hi"+no);
+        location.href = `/items/detail?no=${no}`;
+    }
+</script>
 <div class="header">CU 픽</div>
 <div class="container">
     <div class="count">
@@ -123,14 +127,16 @@
         <c:if test="${ !empty list }">
         <c:forEach items="${list }" var="item">
             <div class="row">
-                <div class ="item">
-                    <div class ="itemImageWrapper" >
+                <div class ="item" >
+                    <div class ="itemImageWrapper" onclick="TodetailPage(${item.no})" >
                         <img  class ="itemImg" src=${item.img} />
                     </div>
                     <div class ="itemText">
-                    <div class ="itemName">${item.name }</div>
+                        <div class ="itemName">${item.name }</div>
                         <div style="display:flex; flex-direction: row; justify-content:center; text-align: center">
-                     <div class="itemPrice">${item.price} </div>
+                             <div class="itemPrice">
+                                     ${item.price}
+                             </div>
                             <div style=" font-size: 18px; display:flex; text-align: center; align-items: center">원</div>
                         </div>
                     </div>
@@ -139,7 +145,7 @@
         </c:forEach>
     </div>
         <div class="NewItemButton">
-        <img  alt="X" src="images/X.png" width="42" height="42"/>
+        <img  alt="X" src="/" width="42" height="42"/>
         </div>
 </div>
 </c:if>

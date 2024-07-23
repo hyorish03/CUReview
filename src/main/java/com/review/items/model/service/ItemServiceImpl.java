@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public Item read(int no) throws SQLException {
-        return null;
+        return dao.select(no);
     }
 
     @Override
