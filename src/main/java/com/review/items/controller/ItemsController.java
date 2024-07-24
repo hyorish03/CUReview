@@ -1,5 +1,7 @@
 package com.review.items.controller;
 
+import com.review.comment.dto.Comment;
+import com.review.comment.model.service.CommentService;
 import com.review.items.dto.Item;
 import com.review.items.model.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -23,15 +26,17 @@ import java.util.List;
 public class ItemsController {
 
     @Autowired
-    ItemService service;
+    ItemService listService;
 
+    @Autowired
+    CommentService commentService;
     @RequestMapping("/list")
     public String List(Model model){
         System.out.println("HI");
         try{
-            List<Item> list = (List<Item>) service.readAll();
+            List<Item> list = (List<Item>) listService.readAll();
             model.addAttribute("list", list);
-            System.out.println(list);
+//            System.out.println(list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,12 +45,17 @@ public class ItemsController {
 
     @RequestMapping("/detail")
     public String Detail(@RequestParam String no, Model model){
-        System.out.println("detail");
+        System.out.println("detail" + no);
+        Item list = null;
+        List<Comment> comments = null;
         try{
             int num = Integer.parseInt(no);
-            Item list = (Item) service.read(num);
-            model.addAttribute("detailList", list);
-            System.out.println(list);
+             list = (Item) listService.read(num);
+             comments = (List<Comment>) commentService.read(num);
+            model.addAttribute("list", list);
+            model.addAttribute("comments", comments);
+
+            System.out.println(comments);
         } catch (SQLException e) {
             e.printStackTrace();
         }

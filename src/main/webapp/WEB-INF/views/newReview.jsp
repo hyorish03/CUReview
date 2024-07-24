@@ -90,7 +90,7 @@
             font-family: Pretendard;
             font-weight: bold;
             font-size: 18px;
-         }
+        }
         .makeReviewButton{
             width:100%;
             height: 100px;
@@ -110,50 +110,42 @@
 <body style="overflow: scroll; margin: 0px">
 
 <script>
-    function ToNewReviewPage(no){
-        alert(no);
-        let num = no.toString();
-        location.href="/review?no="+num;
+
+    function ApplyNewReview(){
+        const text = document.getElementById('inputBox').value;
+        alert(text);
     }
+
+
 </script>
+<div class="header">리뷰 등록</div>
 
-<div><div class="header">상세페이지</div>
+    <c:if test="${!empty list}">
+        <div class="containerWrapper">
+            <div class="container">
+                <div class="info">
+                    <img src = ${list.img} width=291/>
+                    <div class="itemText">
+                        <div class="itemName">${list.name}</div>
+                        <div class="itemPrice">${list.price}
+                            <div style=" font-size: 20px; font-weight: 600; display:flex; text-align: center; align-items: center">원</div>
+                        </div>
+                    </div>
 
-<c:if test="${!empty list}">
-    <div class="containerWrapper">
-        <div class="container">
-            <div class="info">
-                <img src = ${list.img} width=291/>
-                <div class="itemText">
-                <div class="itemName">${list.name}</div>
-                <div class="itemPrice">${list.price}
-                    <div style=" font-size: 20px; font-weight: 600; display:flex; text-align: center; align-items: center">원</div>
                 </div>
-                </div>
-            </div>
-            <div class="ReviewContainer">
+                <div class="ReviewContainer">
 
-                <c:if test="${!empty comments}">
-                    <div class="title">전체리뷰(${comments.size()})</div>
-                    <c:forEach items="${comments}" var="item">
-                        <div>${item.comment_text}</div>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty comments}">
-                    <div> 댓글 없어용 </div>
-                </c:if>
-                <div class="makeReviewButton" onclick="ToNewReviewPage(${list.no})">댓글 달러 가기</div>
+                </div>
 
             </div>
-
         </div>
-    </div>
-</c:if>
-
-
-    <c:if test="${empty list}">
-        <div>비었어요</div>
     </c:if>
+
+<form type="POST" action="/items/list">
+    <input id="inputBox" onchange="handleTextChange()"/>
+    <button >리뷰 등록하기</button>
+</form>
+
 </div>
 </body>
 </html>

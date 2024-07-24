@@ -38,14 +38,13 @@
             overflow: scroll;
         }
         .count{
-            width: 50%;
-            /*background-color: pink;*/
+            width: 400px;            /*background-color: pink;*/
             display: flex;
             flex-direction: row;
 
         }
         .table{
-            width: 40%;
+            width: 400px;
             height: 100%;
             background-color:white;
             display: grid;
@@ -56,8 +55,7 @@
             align-items: center;
             .row{
                 width:100%;
-                margin-bottom: 10px;
-                border: 2px solid #EBEBEB;
+                margin-bottom: 60px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -71,10 +69,12 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height:180px;
+            height:200px;
         }
         .itemImg {
-            width: 100px;
+            width: 191px;
+            border: 2px solid #EBEBEB;
+
         }
 
         .itemPrice{
@@ -83,7 +83,7 @@
         }
 
         .itemImageWrapper :hover{
-            transform: scale(1.2);
+            transform: scale(1.1);
             transition: transform .3s;
         }
 
@@ -91,10 +91,14 @@
             display: flex;
             align-items: flex-start;
             flex-direction: column;
+            margin-top: 11px;
+            margin-bottom:4px;
         }
+
         .itemName{
             margin-top:10px;
         }
+
         .NewItemButton{
             position: fixed;
             top:90%;
@@ -114,8 +118,8 @@
 <body style="overflow: scroll; margin: 0px">
 <script type="text/javascript">
     function TodetailPage(no){
-        alert("hi"+no);
-        location.href = `/items/detail?no=${no}`;
+        let num = no.toString();
+        location.href = '/items/detail?no='+num;
     }
 </script>
 <div class="header">CU 픽</div>
@@ -124,8 +128,8 @@
             검색 결과 &nbsp;<div style="font-weight: bold">${list.size()}</div>
     </div>
     <div class="table">
-        <c:if test="${ !empty list }">
-        <c:forEach items="${list }" var="item">
+        <c:if test="${ !empty list}">
+        <c:forEach items="${list}" var="item">
             <div class="row">
                 <div class ="item" >
                     <div class ="itemImageWrapper" onclick="TodetailPage(${item.no})" >
@@ -144,9 +148,9 @@
             </div>
         </c:forEach>
     </div>
-        <div class="NewItemButton">
-        <img  alt="X" src="/" width="42" height="42"/>
-        </div>
+<%--        <div class="NewItemButton">--%>
+<%--        <img  alt="X" src="/" width="42" height="42"/>--%>
+<%--        </div>--%>
 </div>
 </c:if>
 
