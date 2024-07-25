@@ -25,8 +25,8 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public int remove(int no) throws SQLException {
-        return 0;
+    public int remove(int comment_id) throws SQLException {
+        return dao.delete(comment_id);
     }
 
     @Override

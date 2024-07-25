@@ -16,13 +16,13 @@ public interface CommentDAO {
     @Insert("insert into comments (no, comment_text) values (#{no}, #{comment_text})")
     public int insert(Comment comment) throws SQLException;
 
-    @Delete("delete from comments where no = #{no}")
-    public int delete(int no) throws SQLException;
+    @Delete("delete from comments where comment_id = #{comment_id}")
+    public int delete(int comment_id) throws SQLException;
 
 //    @Update("update ")
     public int edit(Comment comment) throws SQLException;
 
-    @Select("select c.comment_id, c.comment_text from comments as c join cu as u where u.no = #{no} and c.no = u.no;")
+    @Select("select c.no, c.comment_id, c.comment_text from comments as c join cu as u where u.no = #{no} and c.no = u.no;")
     public List<Comment> select(int no) throws SQLException;
 
     @Select("select * from comments")

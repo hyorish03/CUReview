@@ -103,6 +103,12 @@
             bottom:0;
             right: 0;
         }
+
+        .commentWrapper{
+            display: flex;
+            flex-direction: row;
+
+        }
     </style>
 </head>
 
@@ -136,7 +142,11 @@
                 <c:if test="${!empty comments}">
                     <div class="title">전체리뷰(${comments.size()})</div>
                     <c:forEach items="${comments}" var="item">
+                        <div class="commentWrapper">
                         <div>${item.comment_text}</div>
+                            <div>${item.comment_id}</div>
+                        <div onclick="location.href='/delete?comment_id=${item.comment_id}&no=${item.no}'"> 삭제 </div>
+                        </div>
                     </c:forEach>
                 </c:if>
                 <c:if test="${empty comments}">
