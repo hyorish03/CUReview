@@ -145,11 +145,11 @@
 </c:if>
 
 <c:if test="${!empty singleComment}">
-<form method="post">
-    <input id ="id" type="hidden" name="no" value="" />
-    <input type="text" name="comment_text" value="${singleComment.comment_text}"/>
-    <button type="submit">리뷰 수정하기</button>
-</form>
+    <form method="post">
+        <input id ="id" type="hidden" name="no" value="" />
+        <input type="text" name="comment_text" value="${singleComment.comment_text}"/>
+        <button type="submit">리뷰 수정하기</button>
+    </form>
 </c:if>
 </div>
 </body>
