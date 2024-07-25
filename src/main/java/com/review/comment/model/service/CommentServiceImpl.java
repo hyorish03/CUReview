@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public int edit(Comment comment) throws SQLException {
-        return 0;
+        return dao.update(comment);
     }
 
     @Override
@@ -30,12 +30,12 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public List<Comment> read(int no) throws SQLException {
+    public Comment read(int no) throws SQLException {
         return dao.select(no);
     }
 
     @Override
-    public List<Comment> readAll() throws SQLException {
-        return dao.selectAll();
+    public List<Comment> readAll(int no) throws SQLException {
+        return dao.selectAll(no);
     }
 }

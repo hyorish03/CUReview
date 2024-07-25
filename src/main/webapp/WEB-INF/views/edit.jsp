@@ -90,7 +90,7 @@
             font-family: Pretendard;
             font-weight: bold;
             font-size: 18px;
-         }
+        }
         .makeReviewButton{
             width:100%;
             height: 100px;
@@ -103,12 +103,6 @@
             bottom:0;
             right: 0;
         }
-
-        .commentWrapper{
-            display: flex;
-            flex-direction: row;
-
-        }
     </style>
 </head>
 
@@ -116,14 +110,18 @@
 <body style="overflow: scroll; margin: 0px">
 
 <script>
-    function ToNewReviewPage(no){
-        alert(no);
-        let num = no.toString();
-        location.href="/review?no="+num;
+    let num ;
+    window.onload = function(){
+        num = new URLSearchParams(window.location.search).get('no');
+        // console.log(num);
+        if(num){
+            // console.log(typeof parseInt(num));
+            document.getElementById("id").value=parseInt(num);
+        }
     }
-</script>
 
-<div><div class="header">상세페이지</div>
+</script>
+<div class="header">리뷰 등록</div>
 
 <c:if test="${!empty list}">
     <div class="containerWrapper">
@@ -131,29 +129,14 @@
             <div class="info">
                 <img src = ${list.img} width=291/>
                 <div class="itemText">
-                <div class="itemName">${list.name}</div>
-                <div class="itemPrice">${list.price}
-                    <div style=" font-size: 20px; font-weight: 600; display:flex; text-align: center; align-items: center">원</div>
+                    <div class="itemName">${list.name}</div>
+                    <div class="itemPrice">${list.price}
+                        <div style=" font-size: 20px; font-weight: 600; display:flex; text-align: center; align-items: center">원</div>
+                    </div>
                 </div>
-                </div>
+
             </div>
             <div class="ReviewContainer">
-
-                <c:if test="${!empty comments}">
-                    <div class="title">전체리뷰(${comments.size()})</div>
-                    <c:forEach items="${comments}" var="item">
-                        <div class="commentWrapper">
-                        <div>${item.comment_text}</div>
-                            <div>${item.comment_id}</div>
-                        <div onclick="location.href='/delete?comment_id=${item.comment_id}&no=${item.no}'"> 삭제 </div>
-                            <div onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'"> 수정 </div>
-                        </div>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty comments}">
-                    <div> 댓글 없어용 </div>
-                </c:if>
-                <div class="makeReviewButton" onclick="ToNewReviewPage(${list.no})">댓글 달러 가기</div>
 
             </div>
 
@@ -161,10 +144,13 @@
     </div>
 </c:if>
 
-
-    <c:if test="${empty list}">
-        <div>비었어요</div>
-    </c:if>
+<c:if test="${!empty singleComment}">
+<form method="post">
+    <input id ="id" type="hidden" name="no" value="" />
+    <input type="text" name="comment_text" value="${singleComment.comment_text}"/>
+    <button type="submit">리뷰 수정하기</button>
+</form>
+</c:if>
 </div>
 </body>
 </html>

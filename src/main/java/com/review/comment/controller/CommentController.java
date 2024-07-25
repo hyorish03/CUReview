@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -22,13 +23,13 @@ public class CommentController {
         return "newReview";
     }
     @PostMapping("/review")
-    public String PostReview(Comment comment){
+    public String PostReview(@RequestParam int no, Comment comment){
         try{
             commentService.add(comment);
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return "redirect:/items/list";
+        return "redirect:/items/detail?no="+no;
 
     }
 
@@ -42,5 +43,33 @@ public class CommentController {
         }
 
         return "redirect:/items/detail?no="+no;
+    }
+
+    @GetMapping("/edit")
+    public String GetEditReview(@RequestParam int comment_id, int no, Model model){
+        System.out.println("edit");
+        try {
+            Comment singleComment =  commentService.read(comment_id);
+            model.addAttribute("singleComment", singleComment);
+            System.out.println(singleComment);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String PostEditReview(@RequestParam int comment_id, int no, Comment comment){
+        System.out.println("수정 진짜 합니다 ???");
+        System.out.println(comment);
+        try {
+            commentService.edit(comment);
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return  "redirect:/items/detail?no="+no;
     }
 }

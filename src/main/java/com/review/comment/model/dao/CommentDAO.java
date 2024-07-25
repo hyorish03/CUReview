@@ -19,14 +19,14 @@ public interface CommentDAO {
     @Delete("delete from comments where comment_id = #{comment_id}")
     public int delete(int comment_id) throws SQLException;
 
-//    @Update("update ")
-    public int edit(Comment comment) throws SQLException;
+    @Update("update comments set comment_text=#{comment_text} where comment_id=#{comment_id}")
+    public int update(Comment comment) throws SQLException;
+
+    @Select("select * from comments where comment_id = #{comment_id}")
+    public Comment select(int comment_id) throws SQLException;
 
     @Select("select c.no, c.comment_id, c.comment_text from comments as c join cu as u where u.no = #{no} and c.no = u.no;")
-    public List<Comment> select(int no) throws SQLException;
-
-    @Select("select * from comments")
-    public List<Comment> selectAll() throws SQLException;
+    public List<Comment> selectAll(int no) throws SQLException;
 
 
 

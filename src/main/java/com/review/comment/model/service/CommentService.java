@@ -10,8 +10,8 @@ public interface CommentService  {
     public int edit(Comment comment) throws SQLException;
     public int remove(int no) throws SQLException;
 
-    public List<Comment> read(int no) throws SQLException;
-    public List<Comment> readAll() throws SQLException;
+    public Comment read(int no) throws SQLException;
+    public List<Comment> readAll(int no) throws SQLException;
 
 
 }

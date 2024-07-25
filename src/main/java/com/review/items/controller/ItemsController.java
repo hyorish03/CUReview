@@ -51,7 +51,7 @@ public class ItemsController {
         try{
             int num = Integer.parseInt(no);
              list = (Item) listService.read(num);
-             comments = (List<Comment>) commentService.read(num);
+             comments = (List<Comment>) commentService.readAll(num);
             model.addAttribute("list", list);
             model.addAttribute("comments", comments);
 

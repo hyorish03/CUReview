@@ -148,9 +148,9 @@
             </div>
         </c:forEach>
     </div>
-<%--        <div class="NewItemButton">--%>
-<%--        <img  alt="X" src="/" width="42" height="42"/>--%>
-<%--        </div>--%>
+        <div class="NewItemButton">
+        <img alt="X" src="${pageContext.request.contextPath}/static/X.png" width="42" height="42"/>
+        </div>
 </div>
 </c:if>
 
