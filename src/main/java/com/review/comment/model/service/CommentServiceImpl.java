@@ -16,7 +16,7 @@ public class CommentServiceImpl implements CommentService{
     CommentDAO dao;
     @Override
     public int add(Comment comment) throws SQLException {
-        return 0;
+        return dao.insert(comment);
     }
 
     @Override

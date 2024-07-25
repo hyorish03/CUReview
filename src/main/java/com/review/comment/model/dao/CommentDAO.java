@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface CommentDAO {
 
-    @Insert("insert int comments (comment_id, comment_text) values (#{comment.comment_id}, #{comment.comment_text})")
+    @Insert("insert into comments (no, comment_text) values (#{no}, #{comment_text})")
     public int insert(Comment comment) throws SQLException;
 
     @Delete("delete from comments where no = #{no}")

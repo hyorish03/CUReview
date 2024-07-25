@@ -1,20 +1,20 @@
 package com.review.comment.dto;
 
 public class Comment {
-    private String comment_id;
+    private Integer no;
     private String comment_text;
 
-    public Comment(String comment_id, String comment_text) {
-        this.comment_id = comment_id;
+    public Comment(Integer no, String comment_text) {
+        this.no = no;
         this.comment_text = comment_text;
     }
 
-    public String getComment_id() {
-        return comment_id;
+    public Integer getNo() {
+        return no;
     }
 
-    public void setComment_id(String comment_id) {
-        this.comment_id = comment_id;
+    public void setNo(Integer no) {
+        this.no = no;
     }
 
     public String getComment_text() {
@@ -28,7 +28,7 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "comment_id='" + comment_id + '\'' +
+                "no=" + no +
                 ", comment_text='" + comment_text + '\'' +
                 '}';
     }

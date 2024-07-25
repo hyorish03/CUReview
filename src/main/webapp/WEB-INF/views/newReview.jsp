@@ -110,12 +110,15 @@
 <body style="overflow: scroll; margin: 0px">
 
 <script>
-
-    function ApplyNewReview(){
-        const text = document.getElementById('inputBox').value;
-        alert(text);
+    let num ;
+    window.onload = function(){
+        num = new URLSearchParams(window.location.search).get('no');
+        // console.log(num);
+        if(num){
+            // console.log(typeof parseInt(num));
+            document.getElementById("id").value=parseInt(num);
+        }
     }
-
 
 </script>
 <div class="header">리뷰 등록</div>
@@ -141,9 +144,11 @@
         </div>
     </c:if>
 
-<form type="POST" action="/items/list">
-    <input id="inputBox" onchange="handleTextChange()"/>
-    <button >리뷰 등록하기</button>
+
+<form method="post">
+    <input id ="id" type="hidden" name="no" value="" />
+    <input type="text" name="comment_text"/>
+    <button type="submit">리뷰 등록하기</button>
 </form>
 
 </div>
