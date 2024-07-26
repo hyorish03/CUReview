@@ -241,9 +241,16 @@
     </c:if>
 
 </div>
-<button form="test" class="makeReviewButtonWrapper" type="submit" >
+<button onclick="checkCommentTextNotNull" form="test" class="makeReviewButtonWrapper"  >
     <div class="makeReviewButton">리뷰 등록하기</div>
 </button>
+
+<script>
+    function checkCommentTextNotNull(){
+        const content = document.querySelector(".name");
+        alert(document.querySelector(".name").value)
+    }
+</script>
 </body>
 </html>
 

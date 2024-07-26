@@ -33,11 +33,9 @@ public class ItemsController {
     CommentService commentService;
     @GetMapping("/list")
     public String List(Model model){
-        System.out.println("HI");
         try{
             List<Item> list = (List<Item>) listService.readAll();
             model.addAttribute("list", list);
-//            System.out.println(list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,7 +44,6 @@ public class ItemsController {
 
     @GetMapping("/detail")
     public String Detail(@RequestParam String no, Model model){
-        System.out.println("detail" + no);
         Item list = null;
         List<Comment> comments = null;
         try{

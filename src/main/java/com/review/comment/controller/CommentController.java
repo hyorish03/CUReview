@@ -28,8 +28,6 @@ public class CommentController {
 //    }
     @PostMapping("/review")
     public String PostReview(@RequestParam int no, Comment comment){
-        System.out.println(comment);
-
         try{
             commentService.add(comment);
         } catch(SQLException e){
@@ -54,11 +52,13 @@ public class CommentController {
 
     @GetMapping("/edit")
     public String GetEditReview(@RequestParam int comment_id, int no, Model model){
-        System.out.println("edit");
         try {
             Comment singleComment =  commentService.read(comment_id);
+            Item item;
+            item = itemService.read(no);
             model.addAttribute("singleComment", singleComment);
-            System.out.println(singleComment);
+            model.addAttribute("item", item);
+            System.out.println(no);
         } catch(SQLException e){
             e.printStackTrace();
         }
@@ -83,8 +83,8 @@ public class CommentController {
     @GetMapping("/review")
     public String GetReview(Comment comment, Model model){
         try {
-            Item Item = itemService.read(comment.getNo());
-            model.addAttribute("item", Item);
+            Item item = itemService.read(comment.getNo());
+            model.addAttribute("item", item);
         } catch (SQLException e){
 
             e.printStackTrace();

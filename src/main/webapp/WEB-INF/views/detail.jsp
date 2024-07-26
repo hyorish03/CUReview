@@ -41,6 +41,7 @@
             align-items: center;
             overflow: scroll;
             position: relative;
+            height: 100%;
         }
 
         .container{
@@ -133,16 +134,13 @@
         .commentWrapper{
             display: flex;
             flex-direction: column;
-            /*margin-left:23px;*/
             margin-bottom:32px;
             padding: 26px 7px 12px 30px;
             justify-content: center;
             align-items: center;
-            /*background-color: #EBEBEB;*/
             width: 320px;
             border-radius: 14px;
             border: 1px solid  #DDD;
-            /*z-index: -1;*/
 
         }
         .commentText{
@@ -158,7 +156,6 @@
             display: flex;
             flex-direction: row;
             width: 100%;
-            /*background-color: #5F259F;*/
             justify-content: flex-end;
             margin-top: 20px;
             gap: 8px;
@@ -193,6 +190,7 @@
             position: sticky;
             bottom:0;
             z-index: 1;
+            border: none;
         }
         .makeReviewButton{
             border-radius: 20px;
@@ -300,11 +298,11 @@
 </head>
 
 
-<body style="overflow: scroll; margin: 0px">
-
+<%--<body style="position:relative; overflow: scroll; margin: 0px">--%>
+<body style="height:100vh; overflow: scroll; margin: 0px; width:100vw; display: flex;  flex-direction: column; ">
     <div class="header">
-        <div class="headerText">
-            <
+        <div onclick="location.href='/items/list'" class="headerText">
+            <img src="${pageContext.request.contextPath}/static/ChevronLeft.png"/>
         </div>
     </div>
 
@@ -343,6 +341,7 @@
                         </c:forEach>
                     </c:if>
                     <c:if test="${empty comments}">
+                        <div class="title">전체리뷰(${comments.size()})</div>
                         <div> 댓글 없어용 </div>
                     </c:if>
 
