@@ -148,8 +148,9 @@
         .commentText{
             display: flex;
             flex-direction: column;
-            /*width: 200px;*/
             margin-right:12px;
+            justify-content: flex-start;
+            width: 100%;
 
         }
 
