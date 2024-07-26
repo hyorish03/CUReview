@@ -192,6 +192,9 @@
             z-index: 1;
             border: none;
         }
+        .makeReviewButtonWrapper :focus{
+            scale:
+        }
         .makeReviewButton{
             border-radius: 20px;
             background:  #11CD45;
@@ -292,6 +295,18 @@
             display: none;
         }
 
+        .noComment{
+            font-size: 28px;
+            font-family: Pretendard;
+            color:  #9A9A9A;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 32px;
+        }
     </style>
 
 
@@ -334,7 +349,7 @@
                             <div class="commentWrapper">
                             <div class="commentText">${item.comment_text}</div>
                                 <div id="buttons">
-                                    <div id="deleteButton" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
+                                    <div  onclick="handleDeleteClick(${item.comment_id},${item.no})" id="deleteButton" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
                                     <div id="editButton" onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'">수정</div>
                                 </div>
                             </div>
@@ -342,7 +357,8 @@
                     </c:if>
                     <c:if test="${empty comments}">
                         <div class="title">전체리뷰(${comments.size()})</div>
-                        <div> 댓글 없어용 </div>
+                        <img src="${pageContext.request.contextPath}/static/Simbol.png"/>
+                        <div class="noComment"> 아직 리뷰가 없어요 :( <br/> 첫 리뷰를 쓰러 가볼까요 ? </div>
                     </c:if>
 
             </div>
@@ -364,7 +380,7 @@
             alert(no);
             location.href='/delete?comment_id=' + comment_id+'&no='+no;
         }
-            const openButton = document.querySelector("#deleteButton");
+
             const modal = document.querySelector(".modal");
             const closeButton = modal.querySelector("#no");
             const modalBackground = modal.querySelector(".modal_background");
@@ -373,18 +389,16 @@
             function displayModal() {
                 modal.classList.toggle("hidden");
             }
-            function deleteModal(){
-                console.log('clickedYes')
-                const commentId = openButton.getAttribute("data-comment-id").toString();
-                const no = openButton.getAttribute("data-no").toString();
+
+            function handleDeleteClick(commentId, no){
+                console.log(commentId, no);
                 let deleteUrl = '/delete?comment_id='+commentId+'&no='+no;
                 yesButton.addEventListener("click", function() {
                     window.location.href = deleteUrl;
                 });
                 displayModal();
-            }
 
-            openButton.addEventListener("click",deleteModal);
+            }
             closeButton.addEventListener("click", displayModal);
             modalBackground.addEventListener("click", displayModal);
     </script>

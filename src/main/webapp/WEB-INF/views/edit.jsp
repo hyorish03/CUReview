@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> 상세페이지 </title>
+    <title> 리뷰 수정 </title>
     <style>
         .header{
             width:100%;
@@ -30,6 +30,7 @@
             width: 400px;
             display: flex;
             justify-content: flex-start;
+            margin-left:16px;
 
         }
 
@@ -146,7 +147,7 @@
             line-height: 22px; /* 183.333% */
         }
 
-        input {
+        textarea {
             width:350px;
             min-height: 150px;
             border-radius: 7px;
@@ -162,9 +163,11 @@
             font-style: normal;
             font-weight: 500;
             line-height: 22px; /* 183.333% */
+            resize: none;
+
         }
 
-        input:focus{
+        textarea:focus{
             outline-color: #11CD45;
         }
 
@@ -210,8 +213,9 @@
     }
 </script>
 <div class="header">
+    <img src="${pageContext.request.contextPath}/static/ChevronLeft.png"/>
     <div class="headerText">
-        리뷰하기
+        리뷰수정
     </div>
 </div>
 <div class="container">
@@ -241,7 +245,8 @@
             <c:if test="${!empty singleComment}">
                 <form id="test"  method="post">
                     <input  type="hidden" name="no" value="" />
-                    <input class="name" type="text" name="comment_text" value="${singleComment.comment_text}"/>
+<%--                    <input class="name" type="text" name="comment_text" value="${singleComment.comment_text}"/>--%>
+                    <textarea class="name" type="text" name="comment_text" value="">${singleComment.comment_text}</textarea>
                             <div class="makeReviewButtonWrapper" >
                     <button class="editBtn" type="submit">리뷰 수정하기</button>
                             </div>
@@ -251,31 +256,10 @@
     </c:if>
 
 </div>
-<%--    <button form="test" class="makeReviewButtonWrapper" type="submit" >--%>
-<%--&lt;%&ndash;        <div class="makeReviewButton">리뷰 수정하기</div>&ndash;%&gt;--%>
-<%--        수정하기--%>
-<%--    </button>--%>
+
 
 </body>
 </html>
-
-
-
-
-
-<%--<c:if test="${!empty singleComment}">--%>
-<%--    <form method="post">--%>
-<%--        <input id ="id" type="hidden" name="no" value="" />--%>
-<%--        <input type="text" name="comment_text" value="${singleComment.comment_text}"/>--%>
-<%--        <button type="submit">리뷰 수정하기</button>--%>
-<%--    </form>--%>
-<%--</c:if>--%>
-<%--</div>--%>
-<%--</body>--%>
-<%--</html>--%>
-
-
-
 
 
 
