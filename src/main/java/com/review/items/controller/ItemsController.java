@@ -7,6 +7,7 @@ import com.review.items.model.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +31,7 @@ public class ItemsController {
 
     @Autowired
     CommentService commentService;
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String List(Model model){
         System.out.println("HI");
         try{
@@ -43,7 +44,7 @@ public class ItemsController {
         return "list";
     }
 
-    @RequestMapping("/detail")
+    @GetMapping("/detail")
     public String Detail(@RequestParam String no, Model model){
         System.out.println("detail" + no);
         Item list = null;
