@@ -2,7 +2,6 @@ package com.review.comment.dto;
 
 public class Comment {
     private Integer no;
-
     private Integer comment_id;
     private String comment_text;
 

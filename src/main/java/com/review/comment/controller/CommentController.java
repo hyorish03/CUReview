@@ -2,6 +2,8 @@ package com.review.comment.controller;
 
 import com.review.comment.dto.Comment;
 import com.review.comment.model.service.CommentService;
+import com.review.items.dto.Item;
+import com.review.items.model.service.ItemService;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,18 +18,23 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    ItemService itemService;
 
-    @GetMapping("/review")
-    public String GetReview(){
-        System.out.println("getreview");
-        return "newReview";
-    }
+//    @GetMapping("/review")
+//    public String GetReview(){
+//        System.out.println("getreview");
+//        return "newReview";
+//    }
     @PostMapping("/review")
     public String PostReview(@RequestParam int no, Comment comment){
+        System.out.println(comment);
+
         try{
             commentService.add(comment);
         } catch(SQLException e){
             e.printStackTrace();
+            System.out.println(e);
         }
         return "redirect:/items/detail?no="+no;
 
@@ -71,5 +78,17 @@ public class CommentController {
         }
 
         return  "redirect:/items/detail?no="+no;
+    }
+
+    @GetMapping("/review")
+    public String GetReview(Comment comment, Model model){
+        try {
+            Item Item = itemService.read(comment.getNo());
+            model.addAttribute("item", Item);
+        } catch (SQLException e){
+
+            e.printStackTrace();
+        }
+        return "newReview";
     }
 }
