@@ -500,7 +500,7 @@
             <div class="pwModal_background"></div>
             <div class="pwModal_content">
                 <div id="pwDeleteText">비밀번호를 입력해주세요</div>
-                <div id="inputWrapper">
+                <div id="inputWrapper" >
                 <input id="pwinput" type="number" name="checkPW"/>
                 <button style="margin-top: 5px; background-color:#1EDD81;" id="pwYes" onclick="handleCommentPW()">다음</button>
                 </div>
@@ -533,8 +533,10 @@
                                     </summary>
                                     <div id="buttons">
 <%--                                        <div  onclick="OpenDeleteModal(${item.comment_id},${item.no})" id="deleteButton" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>--%>
-    <div  onclick="OpenPWCheckModal(${item.comment_id},${item.no},${item.comment_pw})" id="openDeleteBTN" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
-    <div id="editButton" onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'">수정</div>
+    <div  onclick="OpenPWCheckModal(${item.comment_id},${item.no},${item.comment_pw}, 'delete')" id="openDeleteBTN" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
+
+    <div  onclick="OpenPWCheckModal(${item.comment_id},${item.no},${item.comment_pw}, 'edit')" id="openDeleteBTN" data-comment-id="${item.comment_id}" data-no="${item.no}">수정</div>
+<%--    <div id="editButton" onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'">수정</div>--%>
                                     </div>
                                 </details>
                                 </div>
@@ -575,11 +577,9 @@
             const modalBackground = modal.querySelector(".modal_background");
             const yesButton = modal.querySelector("#yes");
 
-
             function displayModal() {
                 modal.classList.toggle("hidden");
             }
-
 
             function OpenDeleteModal(commentId, no) {
                 console.log(commentId, no);
@@ -590,19 +590,18 @@
                 displayModal();
             }
 
-
-
             const pwModal = document.querySelector(".pwModal");
             const pwModalBackground = pwModal.querySelector(".pwModal_background");
             const pwYesButton = pwModal.querySelector("#pwYes");
-            function displayPWModal() {
+            function displayPWModal(from) {
                 pwModal.classList.toggle("pwHidden");
+                pwYesButton.setAttribute("from", from);
             }
+
             let pwTemp = 0;
             let commentIdTemp, noTemp;
-            function OpenPWCheckModal(commentId, no, pw) {
-                displayPWModal();
-                console.log("Opened");
+            function OpenPWCheckModal(commentId, no, pw, from) {
+                displayPWModal(from);
                 pwTemp = pw;
                 commentIdTemp = commentId;
                 noTemp = no;
@@ -612,15 +611,21 @@
             function handleCommentPW() {
                 console.log("TEMP",pwTemp);
                 var pw = document.getElementById('pwinput').value;
+                var from = document.getElementById('pwYes').getAttribute("from");
+                console.log("F", from);
                 if(pw == pwTemp) {
                     console.log("정답");
-                    displayPWModal();
-                    OpenDeleteModal(commentIdTemp, noTemp);
+                    if(from == 'delete') {
+                        displayPWModal();
+                        OpenDeleteModal(commentIdTemp, noTemp);
+                    } else if (from == 'edit'){
+                        console.log(commentIdTemp, noTemp);
+                        location.href='/edit?comment_id='+commentIdTemp +'&no=' + noTemp;
+                    }
                 } else {
                     alert('비밀번호가 다릅니다.');
                 }
             }
-
             closeButton.addEventListener("click", displayModal);
             modalBackground.addEventListener("click", displayModal);
             pwModalBackground.addEventListener("click", displayPWModal);

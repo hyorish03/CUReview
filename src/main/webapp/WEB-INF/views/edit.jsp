@@ -203,17 +203,11 @@
 
 
 <body style="height:100vh; overflow: scroll; margin: 0px; width:100vw; display: flex; align-items:center; justify-content: center; flex-direction: column">
-<script>
-    let num ;
-    window.onload = function(){
-        num = new URLSearchParams(window.location.search).get('no');
-        if(num){
-            document.getElementById("id").value=parseInt(num);
-        }
-    }
-</script>
+
 <div class="header">
-    <img src="${pageContext.request.contextPath}/static/ChevronLeft.png"/>
+    <div onclick="window.location.href='/items/list'">
+    <img  src="${pageContext.request.contextPath}/static/ChevronLeft.png"/>
+    </div>
     <div class="headerText">
         리뷰수정
     </div>
@@ -244,7 +238,7 @@
             </form>
             <c:if test="${!empty singleComment}">
                 <form id="test"  method="post">
-                    <input  type="hidden" name="no" value="" />
+                    <input id="id" type="hidden" name="no" value="" />
 <%--                    <input class="name" type="text" name="comment_text" value="${singleComment.comment_text}"/>--%>
                     <textarea class="name" type="text" name="comment_text" value="">${singleComment.comment_text}</textarea>
                             <div class="makeReviewButtonWrapper" >
@@ -254,7 +248,15 @@
             </c:if>
         </div>
     </c:if>
-
+    <script>
+        let num ;
+        window.onload = function(){
+            num = new URLSearchParams(window.location.search).get('no');
+            if(num){
+                document.getElementById("id").value=parseInt(num);
+            }
+        }
+    </script>
 </div>
 
 
