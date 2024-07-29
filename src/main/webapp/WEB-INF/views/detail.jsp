@@ -532,11 +532,8 @@
                                         <img class="menuDots" src="${pageContext.request.contextPath}/static/MenuDotHoriz.png"/>
                                     </summary>
                                     <div id="buttons">
-<%--                                        <div  onclick="OpenDeleteModal(${item.comment_id},${item.no})" id="deleteButton" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>--%>
     <div  onclick="OpenPWCheckModal(${item.comment_id},${item.no},${item.comment_pw}, 'delete')" id="openDeleteBTN" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
-
-    <div  onclick="OpenPWCheckModal(${item.comment_id},${item.no},${item.comment_pw}, 'edit')" id="openDeleteBTN" data-comment-id="${item.comment_id}" data-no="${item.no}">수정</div>
-<%--    <div id="editButton" onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'">수정</div>--%>
+    <div  onclick="OpenPWCheckModal(${item.comment_id},${item.no},${item.comment_pw}, 'edit')" id="editButton" data-comment-id="${item.comment_id}" data-no="${item.no}">수정</div>
                                     </div>
                                 </details>
                                 </div>

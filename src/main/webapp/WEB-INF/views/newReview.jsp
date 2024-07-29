@@ -191,6 +191,47 @@
             align-items: center;
         }
 
+        #pwInput{
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+            margin-left: 35px;
+            width: 100%;
+            justify-content: flex-start;
+            height: 45px;
+            /*background-color: #70A87F;*/
+            align-items: center;
+            text-align: center;
+        }
+        #pwInputTxt{
+            color: #343434;
+            font-family: Pretendard;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 157%; /* 21.98px */
+            margin-right: 10px;
+        }
+        input{
+            width: 150px;
+            border-radius: 19px;
+            border: none;
+            background-color: #EBEBEB;
+            padding-left: 10px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Firefox  */
+        input[type='number'] {
+            -moz-appearance: textfield;
+        }
+
+        input:focus{
+            outline: none;
+        }
     </style>
 </head>
 
@@ -235,21 +276,31 @@
             <form id="test" method="post">
                 <input  id ="id" type="hidden" name="no" value="" />
                 <textarea placeholder="꿀팁 가득, 상세한 리뷰를 작성해보세요 !&#10;반품, 환불 관련 내용은 고객센터로 별도 문의해주세요." name="comment_text" class="name"></textarea>
-                <input id="pwd" type="number" name="comment_pw"/>
+                <div id="pwInput"><div id="pwInputTxt">비밀번호: </div><input id="pwd" type="password" name="comment_pw"/></div>
             </form>
         </div>
 
     </c:if>
 
 </div>
-<button onclick="checkCommentTextNotNull" form="test" class="makeReviewButtonWrapper"  >
+<button onclick="checkCommentTextNotNull()" class="makeReviewButtonWrapper"  >
     <div class="makeReviewButton">리뷰 등록하기</div>
 </button>
 
 <script>
     function checkCommentTextNotNull(){
-        const content = document.querySelector(".name");
-        alert(document.querySelector(".name").value)
+        var commentText = document.querySelector('textarea[name="comment_text"]').value;
+        var pwText = document.querySelector('input[name="comment_pw"]').value;
+        // 값이 비어 있는지 확인합니다.
+        if (commentText.trim() === "") {
+            // 값이 비어 있으면 alert 창을 띄웁니다.
+            alert("리뷰는 최소 10자 이상 입력해주세요.");
+        } else if(pwText.trim()===""){
+            alert("비밀번호를 입력하세요.");
+        } else {
+            // 값이 비어 있지 않으면 폼을 제출합니다.
+            document.getElementById("test").submit();
+        }
     }
 </script>
 </body>
