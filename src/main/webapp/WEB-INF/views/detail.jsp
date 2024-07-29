@@ -398,8 +398,11 @@
             width: 334px;
             height: 181px;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .pwModal_content #deleteText{
+        .pwModal_content #pwDeleteText{
             color:  #343434;
             text-align: center;
             font-family: Pretendard, serif;
@@ -407,7 +410,9 @@
             font-style: normal;
             font-weight: 700;
             line-height: 157%; /* 34.54px */
-            margin-top: 40px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+
         }
         button {
             width: 142px;
@@ -415,28 +420,66 @@
             flex-shrink: 0;
             margin-top: 30px;
             border: none;
+            border-radius: 12px;
+        }
+
+        #pwinput{
+            border: none;
+            border-radius: 12px;
+            background: #F5F6F8;
+            height: 36px;
+            width: 60%;
+            padding: 0 20px;
+        }
+        #inputWrapper :focus{
+            outline: none;
+        }
+
+        #inputWrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            color: #343434;
+            font-family: Pretendard;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 157%; /* 21.98px */
 
         }
 
-        #pwyes{
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Firefox  */
+        input[type='number'] {
+            -moz-appearance: textfield;
+        }
+
+        #pwYes{
             color:  #FFF;
             text-align: center;
             font-family: Pretendard;
-            font-size: 18px;
+            font-size: 20px;
             font-style: normal;
-            font-weight: 700;
+            font-weight: 500;
             line-height: normal;
-            letter-spacing: 0.54px;
             border-radius: 12px;
             background:#1EDD81;
+            height: 40px;
         }
+
     </style>
 
 
 </head>
 
 
-<%--<body style="position:relative; overflow: scroll; margin: 0px">--%>
 <body style="height:100vh; overflow: scroll; margin: 0px; width:100vw; display: flex;  flex-direction: column; ">
 <div class="headerWrapper">
     <div class="header">
@@ -457,8 +500,10 @@
             <div class="pwModal_background"></div>
             <div class="pwModal_content">
                 <div id="pwDeleteText">비밀번호를 입력해주세요</div>
+                <div id="inputWrapper">
                 <input id="pwinput" type="number" name="checkPW"/>
-                <button id="pwYes" onclick="handleCommentPW()">다음</button>
+                <button style="margin-top: 5px; background-color:#1EDD81;" id="pwYes" onclick="handleCommentPW()">다음</button>
+                </div>
             </div>
         </div>
     <c:if test="${!empty list}">
