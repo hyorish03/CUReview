@@ -21,13 +21,20 @@ public class CommentController {
     @Autowired
     ItemService itemService;
 
-//    @GetMapping("/review")
-//    public String GetReview(){
-//        System.out.println("getreview");
-//        return "newReview";
-//    }
+    @GetMapping("/review")
+    public String GetReview(Comment comment, Model model){
+        try {
+            Item item = itemService.read(comment.getNo());
+            model.addAttribute("item", item);
+        } catch (SQLException e){
+
+            e.printStackTrace();
+        }
+        return "newReview";
+    }
     @PostMapping("/review")
     public String PostReview(@RequestParam int no, Comment comment){
+        System.out.println(comment);
         try{
             commentService.add(comment);
         } catch(SQLException e){
@@ -80,15 +87,5 @@ public class CommentController {
         return  "redirect:/items/detail?no="+no;
     }
 
-    @GetMapping("/review")
-    public String GetReview(Comment comment, Model model){
-        try {
-            Item item = itemService.read(comment.getNo());
-            model.addAttribute("item", item);
-        } catch (SQLException e){
 
-            e.printStackTrace();
-        }
-        return "newReview";
-    }
 }

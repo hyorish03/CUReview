@@ -165,7 +165,7 @@
         }
 
         textarea{
-            width:350px;
+            width:330px;
             min-height: 150px;
             border-radius: 7px;
             border: 1px solid  #DDD;
@@ -185,9 +185,10 @@
         }
 
         form{
-            width:100%;
             display: flex;
             justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
     </style>
@@ -229,12 +230,12 @@
                 <img src="${pageContext.request.contextPath}/static/ReviewSample2.png"/>
                 </div>
                 <div class="reviewAdvice">초콜릿의 질감, 제품의 단면 등 상품의 디테일을 보여주세요 ! </div>
-
             </div>
             <div class="smallTitle"> 솔직한 상품 리뷰를 남겨주세요 </div>
             <form id="test" method="post">
                 <input  id ="id" type="hidden" name="no" value="" />
                 <textarea placeholder="꿀팁 가득, 상세한 리뷰를 작성해보세요 !&#10;반품, 환불 관련 내용은 고객센터로 별도 문의해주세요." name="comment_text" class="name"></textarea>
+                <input id="pwd" type="number" name="comment_pw"/>
             </form>
         </div>
 

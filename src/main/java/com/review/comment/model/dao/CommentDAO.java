@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface CommentDAO {
 
-    @Insert("insert into comments (no, comment_id,  comment_text) values (#{no}, #{comment_id}, #{comment_text})")
+    @Insert("insert into comments (no, comment_id,  comment_text, comment_pw) values (#{no}, #{comment_id}, #{comment_text}, #{comment_pw})")
     public int insert(Comment comment) throws SQLException;
 
     @Delete("delete from comments where comment_id = #{comment_id}")
@@ -25,7 +25,7 @@ public interface CommentDAO {
     @Select("select * from comments where comment_id = #{comment_id}")
     public Comment select(int comment_id) throws SQLException;
 
-    @Select("select c.no, c.comment_id, c.comment_text from comments as c join cu as u where u.no = #{no} and c.no = u.no;")
+    @Select("select c.no, c.comment_id, c.comment_text, c.comment_pw from comments as c join cu as u where u.no = #{no} and c.no = u.no;")
     public List<Comment> selectAll(int no) throws SQLException;
 
 
