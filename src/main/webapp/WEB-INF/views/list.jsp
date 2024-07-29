@@ -9,16 +9,23 @@
     <title> CU 인기상품</title>
 
     <style>
-        .header{
-            width:100%;
-            height:60px;
-            background-color: white;
+        .headerWrapper{
+            width: 100%;
             justify-content: center;
             display: flex;
             align-items: center;
+            background-color: #fafafa;
+        }
+        .header{
+            width:500px;
+            height:60px;
+            background-color: white;
             position: sticky;
             top:0;
             z-index: 1;
+            justify-content: center;
+            display: flex;
+            align-items: center;
         }
         .headerText{
             color: #000;
@@ -33,9 +40,23 @@
             justify-content: flex-start;
 
         }
-        .container {
-            margin-top:15px;
+
+        .containerWrapper {
             width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            overflow: scroll;
+            position: relative;
+            height: 100%;
+            z-index: 1;
+            background-color: #fafafa;
+        }
+
+        .container {
+            padding-top:15px;
+            width: 500px;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -44,6 +65,16 @@
             align-items: center;
             overflow: scroll;
         }
+        /*.container{*/
+        /*    width: 400px;*/
+        /*    height: 100%;*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    flex-direction: column;*/
+        /*    background-color: #fff;*/
+        /*    z-index: -1;*/
+        /*}*/
+
         .count{
             width: 400px;            /*background-color: pink;*/
             display: flex;
@@ -90,7 +121,6 @@
             border-radius: 15%;
 
         }
-
         .itemPrice{
             color: #222;
             font-feature-settings: 'clig' off, 'liga' off;
@@ -102,7 +132,6 @@
             padding-left: 10px;
 
         }
-
         .itemText{
             width: 100%;
             display: flex;
@@ -117,7 +146,6 @@
             font-weight: 400;
             line-height: 22px;
         }
-
         .itemName{
             margin-top:10px;
             color:#222;
@@ -153,11 +181,14 @@
         location.href = '/items/detail?no='+num;
     }
 </script>
+<div class="headerWrapper">
 <div class="header">
     <div class="headerText">
     CU 인기상품
     </div>
 </div>
+</div>
+<div class="containerWrapper">
 <div class="container">
     <div class="count">
             검색 결과 &nbsp;<div style="font-weight: bold">${list.size()}</div>
@@ -186,6 +217,7 @@
 <%--        <div class="NewItemButton">--%>
 <%--        <img alt="X" src="${pageContext.request.contextPath}/static/X.png" width="42" height="42"/>--%>
 <%--        </div>--%>
+</div>
 </div>
 </c:if>
 

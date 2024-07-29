@@ -8,16 +8,23 @@
     <meta charset="UTF-8">
     <title> 상세페이지 </title>
     <style>
-        .header{
-            width:100%;
-            height:60px;
-            background-color: white;
+        .headerWrapper{
+            width: 100%;
             justify-content: center;
             display: flex;
             align-items: center;
+            background-color: #fafafa;
+        }
+        .header{
+            width:400px;
+            height:60px;
+            background-color: white;
             position: sticky;
             top:0;
             z-index: 1;
+            justify-content: center;
+            display: flex;
+            align-items: center;
         }
         .headerText{
             color: #000;
@@ -33,7 +40,6 @@
 
         }
         .containerWrapper {
-            /*margin-top:30px;*/
             width: 100%;
             display: flex;
             justify-content: center;
@@ -42,6 +48,8 @@
             overflow: scroll;
             position: relative;
             height: 100%;
+            z-index: 1;
+            background-color: #fafafa;
         }
 
         .container{
@@ -50,6 +58,8 @@
             display: flex;
             align-items: center;
             flex-direction: column;
+            background-color: #fff;
+            z-index: -1;
         }
 
         .info{
@@ -107,6 +117,7 @@
             display: flex;
             flex-direction: row;
             margin-top:20px;
+
         }
 
         .ReviewContainer{
@@ -133,14 +144,15 @@
 
         .commentWrapper{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             margin-bottom:32px;
-            padding: 26px 7px 12px 30px;
+            padding: 8px 7px 12px 30px;
             justify-content: center;
             align-items: center;
             width: 320px;
             border-radius: 14px;
             border: 1px solid  #DDD;
+            min-height: 120px
 
         }
         .commentText{
@@ -149,17 +161,18 @@
             margin-right:12px;
             justify-content: flex-start;
             width: 100%;
-
+            margin-top:20px;
         }
 
         #buttons {
             display: flex;
-            flex-direction: row;
-            width: 100%;
-            justify-content: flex-end;
-            margin-top: 20px;
             gap: 8px;
-
+            flex-direction: column;
+            justify-content: center;
+            width: 24px;
+            background-color: #fff;
+            align-items: flex-end;
+            margin-top: 10px;
         }
 
         #buttons div{
@@ -176,13 +189,14 @@
             font-weight: 500;
             line-height: 22px; /* 183.333% */
             cursor:pointer;
+            width:32px;
 
         }
 
         .makeReviewButtonWrapper{
-            width:100%;
+            width:400px;
             height: 100px;
-            background-color: white;
+            background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -192,9 +206,15 @@
             z-index: 1;
             border: none;
         }
-        .makeReviewButtonWrapper :focus{
-            scale:
+
+        .makeReviewButtonWrapperBG{
+            background-color: #fafafa;
+            width:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         .makeReviewButton{
             border-radius: 20px;
             background:  #11CD45;
@@ -256,15 +276,14 @@
             line-height: 157%; /* 34.54px */
             margin-top: 40px;
         }
-
         button {
             width: 142px;
             height: 48px;
             flex-shrink: 0;
             margin-top: 30px;
             border: none;
-        }
 
+        }
         #no{
             color: #5D5D5D;
             text-align: center;
@@ -275,7 +294,7 @@
             line-height: normal;
             letter-spacing: 0.54px;
             border-radius: 12px;
-            background:  #F5F6F8;
+            /*background:  #F5F6F8;*/
         }
 
         #yes{
@@ -307,6 +326,45 @@
             text-align: center;
             margin-top: 32px;
         }
+
+        /* summary 버튼  */
+        .menuDots{
+            cursor: pointer;
+        }
+        .menuDots:focus{
+            transform: scale(1.4);
+        }
+        summary::-webkit-details-marker { /* Safari 브라우저용 사용자 정의 스타일 */
+            display: none;
+        }
+        summary {
+            display: flex; /* 그 외의 브라우저용 사용자 정의 스타일 */
+            transition: transform 0.1s; /* Animation */
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-right: 10px;
+            z-index: 1;
+            width:100%;
+
+        }
+        summary:active{
+            transform: translateY(2px);
+        }
+        details{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 24px;
+        }
+        .menus{
+            display: flex;
+            flex-direction: column;
+            width: 36px;
+            height: 100%;
+            align-items: center;
+            z-index: 1;
+        }
+
     </style>
 
 
@@ -315,12 +373,13 @@
 
 <%--<body style="position:relative; overflow: scroll; margin: 0px">--%>
 <body style="height:100vh; overflow: scroll; margin: 0px; width:100vw; display: flex;  flex-direction: column; ">
+<div class="headerWrapper">
     <div class="header">
         <div onclick="location.href='/items/list'" class="headerText">
-            <img src="${pageContext.request.contextPath}/static/ChevronLeft.png"/>
+            <img class="back" src="${pageContext.request.contextPath}/static/ChevronLeft.png"/>
         </div>
     </div>
-
+</div>
     <div class="modal hidden">
         <div class="modal_background"> </div>
         <div class="modal_content">
@@ -347,11 +406,20 @@
                         <div class="title">전체리뷰(${comments.size()})</div>
                         <c:forEach items="${comments}" var="item">
                             <div class="commentWrapper">
-                            <div class="commentText">${item.comment_text}</div>
-                                <div id="buttons">
-                                    <div  onclick="handleDeleteClick(${item.comment_id},${item.no})" id="deleteButton" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
-                                    <div id="editButton" onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'">수정</div>
+                                <div class="commentText">${item.comment_text}</div>
+                                <div class="menus">
+                                <details>
+                                    <summary>
+                                        <img class="menuDots" src="${pageContext.request.contextPath}/static/MenuDotHoriz.png"/>
+                                    </summary>
+                                    <div id="buttons">
+                                        <div  onclick="handleDeleteClick(${item.comment_id},${item.no})" id="deleteButton" data-comment-id="${item.comment_id}" data-no="${item.no}">삭제</div>
+                                        <div id="editButton" onclick="location.href='/edit?comment_id=${item.comment_id}&no=${item.no}'">수정</div>
+                                    </div>
+                                </details>
                                 </div>
+
+
                             </div>
                         </c:forEach>
                     </c:if>
@@ -366,9 +434,11 @@
 
     </c:if>
 </div>
+<div class="makeReviewButtonWrapperBG">
     <div class="makeReviewButtonWrapper" onclick="ToNewReviewPage(${list.no})">
         <div class="makeReviewButton">리뷰 쓰러 가기</div>
     </div>
+</div>
 
     <script>
         function ToNewReviewPage(no){
